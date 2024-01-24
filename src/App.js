@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import {DefaultEditor} from "./editor/components";
 
-function App() {
+export default function App() {
+  const [html, setHtml] = React.useState('');
+
+  function onChange(e) {
+    setHtml(e.target.value);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+        <DefaultEditor
+            containerProps={{ style: { resize: 'vertical' } }}
+            placeholder="Text Editor"
+            value={html}
+            onChange={onChange}
+            title="Valere Text Editor"
+        />
+        <hr />
+        <div dangerouslySetInnerHTML={{ __html: html }}>
+        </div>
+      </>
   );
 }
-
-export default App;
